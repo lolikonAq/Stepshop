@@ -9,18 +9,16 @@ class ProductCategory(models.Model):
     )
 
     description = models.TextField(
-      verbose_name='описание',
-      blank=True,
+        verbose_name='описание',
+        blank=True,
     )
 
+    def __str__(self):
+        return self.name or f'Категория с id{self.pk}'
 
-def __str__(self):
-    return self.name or f'Категория с id{self.pk}'
-
-
-class Meta:
-    verbose_name = 'категория'
-    verbose_name_plural = 'категории'
+    class Meta:
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'
 
 
 class Product(models.Model):
@@ -30,11 +28,10 @@ class Product(models.Model):
         verbose_name='категория',
     )
 
-
     name = models.CharField(
-            verbose_name='имя продукта',
-            max_length=128,
-        )
+        verbose_name='имя продукта',
+        max_length=128,
+    )
 
     image = models.ImageField(
         upload_to='product_images',
@@ -73,10 +70,8 @@ class Product(models.Model):
         auto_now=True,
     )
 
-
     def __str__(self):
         return self.name or f'Продукт с id{self.pk}'
-
 
     class Meta:
         verbose_name = 'продукт'
