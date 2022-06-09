@@ -13,29 +13,28 @@
             <form class="form-horizontal" action="{% url 'auth:register' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
               <p>
-                  <label>Логин:
+                  <label for="username">Логин:</label>
                       {{ register_form.username }}
-                  </label>
               </p>
                 <p>
-                  <label>Имя:
+                  <label for="first_name">Имя:</label>
                       {{ register_form.first_name }}
-                  </label>
               </p>
                 <p>
-                  <label>Пароль:
+                  <label for="password1">Пароль: </label>
                       {{ register_form.password1 }}
-                  </label>
+                      {{ register_form.errors.password1 }}
+
               </p>
                 <p>
-                  <label>Подтверждение пароля:
+                  <label for="password2">Подтверждение пароля:</label>
                       {{ register_form.password2 }}
-                  </label>
+                      {{ register_form.errors.password2 }}
               </p>
                 <p>
-                  <label>Почта:
+                  <label for="email">Почта:</label>
                       {{ register_form.email }}
-                  </label>
+                      {{ register_form.errors.email }}
               </p>
                 <p>
                   <label>Аватар:
@@ -43,9 +42,9 @@
                   </label>
               </p>
                 <p>
-                  <label>Возраст:
+                  <label for="age">Возраст:</label>
                       {{ register_form.age }}
-                  </label>
+                      {{ register_form.errors.age }}
               </p>
 
                 <button type="submit" class="btn-primary">Зарегистрироваться</button>

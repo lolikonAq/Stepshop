@@ -45,7 +45,9 @@ https://www.tooplate.com/view/2114-pixie
           <div class="col-md-12">
             <span>
               {%if user.is_authenticated %}
+              <a href="{% url 'auth:edit' %}">
               {{ user.username }}
+              </a>
               | <a href="/auth/logout/"> Выйти </a>
               {% else %}
               <a href="/auth/login/"> Войти </a>
