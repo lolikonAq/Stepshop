@@ -38,7 +38,7 @@
             <div class="owl-carousel owl-theme">
 
               {% for product in products %}
-                  <a href="#">
+                  <a href="{% url 'products:product' product.pk %}">
                 <div class="featured-item">
                   <img src="{{ product.image|media_folder_products }}" alt="{{ product.name|capfirst }}">
                   <h4>{{ product.name|capfirst }}</h4>
