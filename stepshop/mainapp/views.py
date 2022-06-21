@@ -11,10 +11,20 @@ links_menu = [
 ]
 
 
+def get_basket(user):
+    if user.is_authenticated:
+        return Basket.objects.filter(user=user)
+    return []
+
+
+def get_same_products(current_product):
+    return Product.objects.filter(category=current_product.category).exclude(pk=current_product.pk)
+
+
 def products(request, pk=None):
     title = 'Продукты'
 
-    products_ = Product.objects.all() #.filter(category__name__in=['Бобры', 'Джинсы']).order_by('price')  # [:2]
+    products_ = Product.objects.all()  # .filter(category__name__in=['Джинсы', 'Бобры']).order_by('-price')[:2]
     categories = ProductCategory.objects.all()
 
     basket = []
@@ -38,6 +48,7 @@ def products(request, pk=None):
             'category': category,
             'basket': basket,
         }
+
         return render(request, 'products.html', context)
 
     context = {
@@ -47,8 +58,19 @@ def products(request, pk=None):
         'categories': categories,
         'basket': basket,
     }
+
     return render(request, 'products.html', context)
 
 
-def product(request):
-    return render(request, 'product.html')
+def product(request, pk):
+    title = 'Продукт'
+
+    context = {
+        'title': title,
+        'links_menu': links_menu,
+        'product': get_object_or_404(Product, pk=pk),
+        'basket': get_basket(request.user),
+        'same_products': get_same_products(get_object_or_404(Product, pk=pk)),
+    }
+
+    return render(request, 'product.html', context)
